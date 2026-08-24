@@ -47,69 +47,56 @@
  *   isAnyWaitlisted(passengers)          // => true/false
  *   areAllConfirmed(passengers)          // => true/false
  */
-
 export function findPassenger(passengers, name) {
-  // Your code here
-  if(!Array.isArray(passengers) || typeof name != "string"){
+  if (!Array.isArray(passengers) || typeof name !== "string") {
     return undefined;
   }
 
-  return (
-    passengers.find(passenger => {
-      return passenger.name.toLowerCase() === name.toLowerCase();
-    })
-  )
+  return passengers.find(
+    (passenger) =>
+      typeof passenger?.name === "string" &&
+      passenger.name.toLowerCase() === name.toLowerCase()
+  );
 }
 
-
 export function getPassengerIndex(passengers, name) {
-  // Your code here
-  if(!Array.isArray(passengers) || typeof name !== "string"){
+  if (!Array.isArray(passengers) || typeof name !== "string") {
     return -1;
   }
 
   return passengers.findIndex(
-    (passenger)=> {
-      return name.toLowerCase() === passenger.name.toLowerCase();
-    }
-  )
+    (passenger) =>
+      typeof passenger?.name === "string" &&
+      passenger.name.toLowerCase() === name.toLowerCase()
+  );
 }
-
 
 export function isAnyWaitlisted(passengers) {
-  // Your code here
-  if(!Array.isArray(passengers) || passengers.length === 0){
+  if (!Array.isArray(passengers) || passengers.length === 0) {
     return false;
   }
-  return passengers.some(passenger => {
-    return passenger.status == "waitlisted";
-  })
+
+  return passengers.some(
+    (passenger) => passenger?.status === "waitlisted"
+  );
 }
 
-
 export function areAllConfirmed(passengers) {
-  // Your code here
-  if(!Array.isArray(passengers) || passengers.length === 0){
+  if (!Array.isArray(passengers) || passengers.length === 0) {
     return false;
   }
 
   return passengers.every(
-    (passenger) => {
-      return passenger.status == "confirmed";
-    }
-  )
+    (passenger) => passenger?.status === "confirmed"
+  );
 }
 
-
 export function getWaitlistedPassengers(passengers) {
-  // Your code here
-  if(!Array.isArray(passengers)){
+  if (!Array.isArray(passengers)) {
     return [];
   }
 
   return passengers.filter(
-    (passenger) => {
-      return passenger.status === "waitlisted";
-    }
-  )
+    (passenger) => passenger?.status === "waitlisted"
+  );
 }
