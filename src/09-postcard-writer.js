@@ -51,22 +51,75 @@
  *   isValidPincode("400001")   // => true
  *   countVowels("Namaste")     // => 3
  */
+
 export function writePostcard(sender, receiver, message) {
   // Your code here
+  if(
+    typeof sender !== "string" ||
+    typeof receiver !== "string" ||
+    typeof message !== "string" ||
+    sender.trim() === "" ||
+    receiver.trim() === "" ||
+    message.trim() === ""
+  ){
+    return ""
+  }
+
+  const postCard = `Priy ${receiver},\n\n${message}\n\nAapka/Aapki,\n${sender}`;
+  return postCard;
 }
+
 
 export function isValidPincode(code) {
   // Your code here
+  if(typeof code !== 'string') {
+    return false
+  }
+  if(!code.startsWith("0") && code.length === 6 && /^\d+$/.test(code)){
+    return true;
+  }
+  return false;
 }
+
 
 export function formatPostcardField(label, value, width) {
   // Your code here
+  if(typeof label !== 'string' || typeof value !== 'string'){
+    return "";
+  }
+  const actualWidth = width??12;
+  return label.padEnd(actualWidth) + ": " +(value)
 }
 
+
+// 4. isFromState(address, stateCode)
+//  *      - .endsWith() se check karo ki address kisi state code se end hota hai
+//  *      - Agar address ya stateCode string nahi hai, return false
+//  *      - Example: isFromState("Guddu, Lucknow, UP", "UP") => true
+//  *      - Example: isFromState("Priya, Mumbai, MH", "UP") => false
 export function isFromState(address, stateCode) {
   // Your code here
+  if(typeof stateCode !== 'string' || typeof address !== 'string'){
+    return false;
+  }
+  return address.endsWith(stateCode);
+
 }
 
+
+// 5. countVowels(message)
+//  *      - .match(/[aeiouAEIOU]/g) se saare vowels dhundho
+//  *      - Return: count (match result ki length, ya 0 agar null hai)
+//  *      - Agar message string nahi hai, return 0
+//  *      - Example: countVowels("Namaste India") => 6
 export function countVowels(message) {
   // Your code here
+  if(typeof message !== 'string'){
+    return 0;
+  }
+  const count = message.match(/[aeiouAEIOU]/g)?.length;
+  if(count== null){
+    return 0;
+  }
+  return count;
 }
